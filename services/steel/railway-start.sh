@@ -97,6 +97,9 @@ events { worker_connections 1024; }
 http {
   access_log off;
   server_tokens off;
+  # Map keys hold the full token (up to 256 characters plus prefixes).
+  map_hash_bucket_size 512;
+  map_hash_max_size 4096;
   client_max_body_size 200m;
   client_body_temp_path ${RUN_DIR}/tmp/body;
   proxy_temp_path ${RUN_DIR}/tmp/proxy;
