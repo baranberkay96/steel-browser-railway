@@ -1,5 +1,7 @@
 # Deploy and Host Steel Browser with Railway
 
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/steel-browser-api-for-ai-agents-token-pr?referralCode=20H68q)
+
 Steel Browser is an open-source browser API for AI agents and automation: it starts Chromium sessions on request and lets Puppeteer, Playwright, Selenium or the Steel SDK drive them, with a live session viewer and event logs. This template runs it on Railway behind an access token, because Steel itself has no login.
 
 ## About Hosting Steel Browser
