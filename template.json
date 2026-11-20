@@ -1,0 +1,98 @@
+{
+  "name": "Steel Browser API for AI Agents (Token-Protected)",
+  "description": "Self-hosted Steel headless browser API for AI agents, behind a token.",
+  "category": "AI/ML",
+  "tags": [
+    "steel",
+    "browser",
+    "headless",
+    "cdp",
+    "puppeteer",
+    "playwright",
+    "ai-agents",
+    "automation"
+  ],
+  "image": "https://cdn.jsdelivr.net/gh/steel-dev/steel-browser@v0.5.5-beta/ui/public/icon.svg",
+  "upstream": {
+    "repo": "steel-dev/steel-browser",
+    "release": "v0.5.5-beta",
+    "commit": "161d259dd9dbdfd54d0f20137322a6d8db4a0c09",
+    "image": "ghcr.io/steel-dev/steel-browser:latest@sha256:e10ce7adecc94d000b28d256c45ffa113dc78b4fc8d38de5f7940b139c3a220d",
+    "checked": "2026-11-20"
+  },
+  "services": {
+    "Steel Browser": {
+      "icon": "https://cdn.jsdelivr.net/gh/steel-dev/steel-browser@v0.5.5-beta/ui/public/icon.svg",
+      "source": {
+        "repo": "baranberkay96/steel-browser-railway",
+        "rootDirectory": "/services/steel"
+      },
+      "startCommand": null,
+      "preDeployCommand": null,
+      "healthcheckPath": "/health",
+      "healthcheckTimeout": 300,
+      "restartPolicyType": "ALWAYS",
+      "numReplicas": 1,
+      "cronSchedule": null,
+      "publicDomain": true,
+      "targetPort": 8080,
+      "tcpProxy": null,
+      "volume": {
+        "mountPath": "/data"
+      },
+      "variables": {
+        "STEEL_API_TOKEN": {
+          "defaultValue": "${{secret(48, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Access token, generated at deploy. Send it as Authorization: Bearer, steel-api-key header, ?token= / ?apiKey=, or as the web UI password (user steel).",
+          "required": false
+        },
+        "PORT": {
+          "defaultValue": "8080",
+          "description": "Port of the token gateway (public domain and healthcheck). Steel itself listens on 127.0.0.1:3000 only.",
+          "required": false
+        },
+        "DOMAIN": {
+          "defaultValue": "${{RAILWAY_PUBLIC_DOMAIN}}",
+          "description": "Public host name Steel puts into session URLs (websocketUrl, debugUrl). Change it when you add a custom domain.",
+          "required": false
+        },
+        "USE_SSL": {
+          "defaultValue": "true",
+          "description": "Session URLs use https:// and wss:// (Railway terminates TLS).",
+          "required": false
+        },
+        "CHROME_HEADLESS": {
+          "defaultValue": "true",
+          "description": "Run Chromium headless. The live session viewer works in headless mode too.",
+          "required": false
+        },
+        "LOG_STORAGE_ENABLED": {
+          "defaultValue": "true",
+          "description": "Keep session event logs in DuckDB on the /data volume (shown in the web UI).",
+          "required": false
+        },
+        "LOG_STORAGE_MAX_MB": {
+          "defaultValue": "1024",
+          "description": "At start, a session event log larger than this (MB) is replaced by a new one, so the volume never fills. 0 = no limit.",
+          "required": false
+        },
+        "PROXY_URL": {
+          "defaultValue": "",
+          "description": "Optional outbound proxy you are allowed to use for all sessions, e.g. http://user:pass@host:8080.",
+          "required": false
+        },
+        "STEEL_BASE_URL": {
+          "defaultValue": "https://${{RAILWAY_PUBLIC_DOMAIN}}",
+          "description": "Base URL for steel-sdk (baseURL) and the REST API. Reference it from other services.",
+          "required": false
+        },
+        "STEEL_WS_ENDPOINT": {
+          "defaultValue": "wss://${{RAILWAY_PUBLIC_DOMAIN}}?token=${{STEEL_API_TOKEN}}",
+          "description": "CDP WebSocket URL with the token for Puppeteer browserWSEndpoint / Playwright connectOverCDP.",
+          "required": false
+        }
+      }
+    }
+  },
+  "buckets": []
+}
