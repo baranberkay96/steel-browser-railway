@@ -30,7 +30,7 @@ Variables: `STEEL_API_TOKEN` (`secret(48)` alphanumeric), `PORT` (8080), `DOMAIN
 
 | Service | Idle RAM | Typical RAM | CPU |
 |---|---|---|---|
-| Steel Browser | RAM_IDLE | 0.6–1.5 GB with an active session | near 0 idle, 0.5–1 vCPU per busy session |
+| Steel Browser | ~0.55 GB measured | 0.6–1.5 GB with an active session | near 0 idle, 0.5–1 vCPU per busy session |
 
 Estimated cost: $3–10/month idle to light use. Minimum plan: Trial works for single sessions; Hobby recommended.
 

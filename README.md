@@ -31,7 +31,7 @@ Steel Browser (Apache-2.0, by steel-dev) is a Node.js API that manages a Chromiu
 |---|---|---|---|
 | Steel Browser | nginx token gateway on `PORT`; Steel API on 127.0.0.1:3000 with the web UI at `/ui`; Chromium (DevTools on loopback only) | `/data` | 8080 (public HTTPS domain) |
 
-**Plan:** RAM_PLACEHOLDER
+**Plan:** Hobby recommended. Measured on Railway: about 0.55 GB with Chromium running after a scrape; each active browser session adds 0.3–1 GB.
 
 **Using the token**
 
